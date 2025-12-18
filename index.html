@@ -20,8 +20,10 @@
             background-color: #fdf9f0;
             background-image: url('HAIKEI.png');
             background-position: center center;
-            background-size: cover;
             background-repeat: no-repeat;
+
+            /* cover を使わない（見た目維持） */
+            background-size: 100vw 100vh;
 
             font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
             display: flex;
@@ -44,8 +46,10 @@
             background-color: #fffdf9;
             background-image: url('WASHI.png');
             background-position: center center;
-            background-size: cover;
             background-repeat: no-repeat;
+
+            /* cover を使わない（箱サイズ固定のため見た目同等） */
+            background-size: 100% 100%;
 
             position: relative;
             overflow: hidden;
