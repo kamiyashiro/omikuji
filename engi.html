@@ -2,51 +2,48 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+
 <title>神社神社（かみやしろじんじゃ） / Kamiyashiro Shrine｜影向の湖</title>
 
+<!-- ===== フォント先読み（白抜け防止・必須）===== -->
+<link rel="preload" href="./KouzanBrushFont.woff2" as="font" type="font/woff2" crossorigin>
+
 <style>
-/* --- 衡山毛筆フォント --- */
+/* =====================================================
+   衡山毛筆フォント（白抜け完全防止）
+   ===================================================== */
 @font-face {
   font-family: "Kouzan";
   src: url("./KouzanBrushFont.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block; /* swap禁止・初回白抜け根絶 */
 }
 
-/* --- 背景 和紙（スクロール） --- */
+/* =====================================================
+   背景：和紙（高速・再描画なし）
+   ※ 事前に明度調整済み画像を使用すること
+   ===================================================== */
 html, body {
   margin: 0;
   padding: 0;
-  background-image: url("./WASHI.png");
+  background-image: url("./WASHI_LIGHT.png");
   background-repeat: repeat;
   background-attachment: scroll;
-  position: relative;
 }
 
-/* --- 背景薄化レイヤー --- */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.25);
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* --- レイアウト --- */
+/* =====================================================
+   レイアウト
+   ===================================================== */
 .wrapper {
   max-width: 900px;
   margin: 0 auto;
   padding: 32px;
-  position: relative;
-  z-index: 1;
 }
 
-/* --- h1 メインタイトル（太字・改行防止） --- */
+/* =====================================================
+   メインタイトル
+   ===================================================== */
 h1.main-title {
   border-bottom: 2px solid #000;
   padding-bottom: 0.2em;
@@ -70,7 +67,20 @@ h1.main-title .en {
   color: #444;
 }
 
-/* --- h2（見出し） --- */
+/* =====================================================
+   サブタイトル
+   ===================================================== */
+.subtitle {
+  font-family: "Kouzan", serif;
+  font-size: 24px; /* 18pt */
+  font-weight: bold;
+  margin-bottom: 2em;
+  line-height: 1.4em;
+}
+
+/* =====================================================
+   見出し
+   ===================================================== */
 h2 {
   font-family: "Kouzan", serif;
   font-size: 26.7px; /* 20pt */
@@ -88,7 +98,19 @@ h2 .en {
   color: #666;
 }
 
-/* --- 英文本文 --- */
+/* =====================================================
+   本文（和文）
+   ===================================================== */
+p:not(.en):not(.notice-jp) {
+  font-family: "Kouzan", serif;
+  font-size: 24px; /* 18pt */
+  font-weight: bold;
+  line-height: 1.5em;
+}
+
+/* =====================================================
+   本文（英文）
+   ===================================================== */
 .en {
   font-family: Arial, Helvetica, sans-serif;
   font-style: italic;
@@ -100,24 +122,9 @@ h2 .en {
   line-height: 1.5em;
 }
 
-/* --- サブタイトル --- */
-.subtitle {
-  font-family: "Kouzan", serif;
-  font-size: 24px; /* 18pt */
-  font-weight: bold;
-  margin-bottom: 2em;
-  line-height: 1.4em;
-}
-
-/* --- 本文和文 --- */
-p:not(.en):not(.notice-jp) {
-  font-family: "Kouzan", serif;
-  font-size: 24px; /* 18pt */
-  font-weight: bold;
-  line-height: 1.5em;
-}
-
-/* --- 区切り線 --- */
+/* =====================================================
+   区切り線
+   ===================================================== */
 .divider {
   width: 100%;
   height: 3px;
@@ -126,17 +133,19 @@ p:not(.en):not(.notice-jp) {
   margin: 3em 0 1.5em 0;
 }
 
-/* --- 注意書き（衡山不使用） --- */
+/* =====================================================
+   注意書き（衡山フォント不使用）
+   ===================================================== */
 .notice-jp {
-  font-family: Arial, Helvetica, sans-serif !important;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: normal;
   margin-top: 1.5em;
   line-height: 1.4em;
 }
 
 .notice-en {
-  font-family: Arial, Helvetica, sans-serif !important;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-style: italic;
   font-weight: normal;
@@ -151,7 +160,8 @@ p:not(.en):not(.notice-jp) {
 <div class="wrapper">
 
 <h1 class="main-title">
-  <span class="jp">神社神社（かみやしろじんじゃ）</span> / <span class="en">Kamiyashiro Shrine</span>
+  <span class="jp">神社神社（かみやしろじんじゃ）</span> /
+  <span class="en">Kamiyashiro Shrine</span>
 </h1>
 
 <p class="subtitle">
@@ -199,12 +209,12 @@ Kamiyashiro Shrine – An Ancient Shrine Enshrining Lake Yōgō
 
 <hr class="divider">
 
-<p class="notice-jp" style="font-family:Arial, Helvetica, sans-serif; font-size:20px; font-weight:normal; margin-top:1.5em; line-height:1.4em;">
-※本神社は仮想世界「Secondlife」内に存在する仮想神社であり、現実世界の団体や個人とは一切関係ありません。
+<p class="notice-jp">
+※本神社は仮想世界「Second Life」内に存在する仮想神社であり、現実世界の団体や個人とは一切関係ありません。
 </p>
 
-<p class="notice-en" style="font-family:Arial, Helvetica, sans-serif; font-size:18px; font-style:italic; font-weight:normal; color:#444; margin-bottom:3em; line-height:1.4em;">
-*This shrine exists solely within the virtual world "Secondlife" and has no affiliation with any real-world organizations or individuals.*
+<p class="notice-en">
+*This shrine exists solely within the virtual world "Second Life" and has no affiliation with any real-world organizations or individuals.*
 </p>
 
 </div>
