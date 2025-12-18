@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <title>おみくじ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         @font-face {
             font-family: 'Kouzan';
-            src: url('衡山毛筆フォント.ttf') format('truetype');
-            font-display: swap;        }
+            src: url('KouzanBrushFont.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
         body {
             background: #fdf9f0 url('HAIKEI.png') center center / 100% auto no-repeat fixed;
@@ -39,6 +43,7 @@
             background-size: calc(100% + 5.6px * 2) calc(100% + 5.6px * 2);
             background-clip: border-box;
         }
+
         table.omikuji tr:first-child td { height: 60%; }
         table.omikuji tr:last-child td { height: 40%; }
 
@@ -50,6 +55,7 @@
             background: transparent;
             font-family: 'Kouzan', "Hiragino Mincho ProN", serif;
         }
+
         .jp-area h1 {
             font-size: 60px;
             margin-bottom: 4px;
@@ -57,6 +63,7 @@
             letter-spacing: 0.2em;
             font-weight: bold;
         }
+
         .jp-area h2 {
             font-size: 40px;
             margin-bottom: 16px;
@@ -64,6 +71,7 @@
             letter-spacing: 0.3em;
             font-weight: bold;
         }
+
         .jp-area > div {
             font-size: 25px;
             line-height: 1.55;
@@ -80,22 +88,48 @@
             font-size: 16px;
             line-height: 2.2;
         }
-        .en strong { font-size: 26px; color:#b71c1c; }
+
+        .en strong {
+            font-size: 26px;
+            color:#b71c1c;
+        }
 
         table.omikuji::before,
         table.omikuji::after {
-            content: ""; position: absolute; width: 41.6px; height: 41.6px; background: #c62828;
+            content: "";
+            position: absolute;
+            width: 41.6px;
+            height: 41.6px;
+            background: #c62828;
         }
-        table.omikuji::before { top:-20.8px; left:-20.8px; clip-path: polygon(0 0,100% 0,100% 100%); }
-        table.omikuji::after  { bottom:-20.8px; right:-20.8px; clip-path: polygon(0 0,100% 0,0 100%); }
+
+        table.omikuji::before {
+            top:-20.8px;
+            left:-20.8px;
+            clip-path: polygon(0 0,100% 0,100% 100%);
+        }
+
+        table.omikuji::after {
+            bottom:-20.8px;
+            right:-20.8px;
+            clip-path: polygon(0 0,100% 0,0 100%);
+        }
 
         .footer {
-            position: fixed; right: 30px; bottom: 30px; font-size: 16px; color: #555;
-            background: rgba(255,255,255,0.7); padding: 8px 16px; border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 10; font-weight: 600; letter-spacing: 0.1em;
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            font-size: 16px;
+            color: #555;
+            background: rgba(255,255,255,0.7);
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+            font-weight: 600;
+            letter-spacing: 0.1em;
         }
 
-        /* 左下リンクボタン */
         .link-btn {
             position: fixed;
             left: 30px;
@@ -110,7 +144,7 @@
             border: 5.6px double #c62828;
             border-radius: 21px;
             padding: 10px 14px;
-            height: calc(28px * 6 + 10px * 2); /* 縦文字6文字分＋上下パディング */
+            height: calc(28px * 6 + 10px * 2);
             line-height: 1.25em;
             white-space: nowrap;
             box-shadow: 0 16px 48px rgba(0,0,0,0.35);
@@ -119,32 +153,47 @@
             align-items: center;
             z-index: 20;
         }
-        .link-btn:hover { background: #fef7ef; }
+
+        .link-btn:hover {
+            background: #fef7ef;
+        }
 
         @media (max-width: 600px) {
             .jp-area h1 { font-size: 68px; margin-bottom: 3px; }
             .jp-area h2 { font-size: 38px; margin-bottom: 12px; }
             .jp-area > div { font-size: 31px; line-height: 1.5; }
-            .link-btn { font-size: 24px; padding: 8px 12px; height: calc(24px * 6 + 8px*2); }
+            .link-btn {
+                font-size: 24px;
+                padding: 8px 12px;
+                height: calc(24px * 6 + 8px * 2);
+            }
         }
     </style>
 </head>
+
 <body>
+
 <table class="omikuji">
-    <tr><td class="jp-area">
-        <h1 id="rank">読み込み中…</h1>
-        <h2 id="title"></h2>
-        <div id="jp"></div>
-    </td></tr>
-    <tr><td class="en-area">
-        <strong id="enRank"></strong> — <span id="enTitle"></span><br><br>
-        <span id="enText"></span>
-    </td></tr>
+    <tr>
+        <td class="jp-area">
+            <h1 id="rank">読み込み中…</h1>
+            <h2 id="title"></h2>
+            <div id="jp"></div>
+        </td>
+    </tr>
+    <tr>
+        <td class="en-area">
+            <strong id="enRank"></strong> — <span id="enTitle"></span><br><br>
+            <span id="enText"></span>
+        </td>
+    </tr>
 </table>
 
 <div class="footer">第 <span id="num">?</span> 番 おみくじ</div>
 
-<a class="link-btn" href="https://kamiyashiro.github.io/omikuji/engi.html" target="_blank">かみやしろ神社</a>
+<a class="link-btn" href="https://kamiyashiro.github.io/omikuji/engi.html" target="_blank">
+    かみやしろ神社
+</a>
 
 <script>
 const isTestMode = location.search.includes('test');
@@ -171,28 +220,31 @@ if (!isTestMode) {
         overlay.style.color = '#c62828';
         overlay.style.lineHeight = '2';
         overlay.style.zIndex = '30';
+
         overlay.innerHTML = `
             30分に1回しか引けません<br>
             <span style="font-size:42px; font-weight:bold;">あと ${wait} 分</span> お待ちください
             <hr style="border:0; border-top:3px double #c62828; width:200px; margin:40px auto;">
             You can draw Omikuji only once every 30 minutes<br>
-            <span style="font-size:36px; font-weight:bold; color:#b71c1c;">${wait} more minute${wait > 1 ? 's' : ''}</span> please
+            <span style="font-size:36px; font-weight:bold; color:#b71c1c;">
+                ${wait} more minute${wait > 1 ? 's' : ''}
+            </span> please
         `;
         document.body.appendChild(overlay);
-
         throw new Error("制限中");
     }
 }
 
-// 確率配列方式によるランダム抽選
 fetch('omikuji.xml')
-    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+    .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+    })
     .then(str => {
         const xml = new DOMParser().parseFromString(str, "text/xml");
         const items = Array.from(xml.querySelectorAll('omikuji'));
         if (!items.length) throw new Error('omikuji データなし');
 
-        // ランク別件数に基づく確率配列
         const probabilityArray = [];
 
         const ranksCount = {
@@ -204,11 +256,15 @@ fetch('omikuji.xml')
         };
 
         for (const rank in ranksCount) {
-            const rankItems = items.filter(i => (i.querySelector('rank')?.getAttribute('jp') || i.querySelector('rank')?.textContent) === rank);
+            const rankItems = items.filter(i =>
+                (i.querySelector('rank')?.getAttribute('jp')
+                || i.querySelector('rank')?.textContent) === rank
+            );
             for (let j = 0; j < ranksCount[rank]; j++) {
                 if (rankItems.length > 0) {
-                    const item = rankItems[Math.floor(Math.random() * rankItems.length)];
-                    probabilityArray.push(item);
+                    probabilityArray.push(
+                        rankItems[Math.floor(Math.random() * rankItems.length)]
+                    );
                 }
             }
         }
@@ -219,23 +275,31 @@ fetch('omikuji.xml')
         const rankEn = rankEl.textContent.trim();
 
         document.getElementById('rank').textContent = rankJp;
-        document.getElementById('title').textContent = item.querySelector('title_jp')?.textContent.trim() || '';
-        document.getElementById('jp').textContent = item.querySelector('text_jp')?.textContent.trim() || '';
+        document.getElementById('title').textContent =
+            item.querySelector('title_jp')?.textContent.trim() || '';
+        document.getElementById('jp').textContent =
+            item.querySelector('text_jp')?.textContent.trim() || '';
 
         document.getElementById('rank').style.fontSize = '54px';
         document.getElementById('title').style.fontSize = '36px';
 
         document.getElementById('enRank').textContent = rankEn;
-        document.getElementById('enTitle').textContent = item.querySelector('title_en')?.textContent.trim() || '';
-        document.getElementById('enText').textContent = item.querySelector('text_en')?.textContent.trim() || '';
+        document.getElementById('enTitle').textContent =
+            item.querySelector('title_en')?.textContent.trim() || '';
+        document.getElementById('enText').textContent =
+            item.querySelector('text_en')?.textContent.trim() || '';
+
         document.getElementById('num').textContent = items.indexOf(item) + 1;
 
-        if (!isTestMode) localStorage.setItem('omikuji_last', Date.now());
+        if (!isTestMode) {
+            localStorage.setItem('omikuji_last', Date.now());
+        }
     })
     .catch(err => {
         document.getElementById('rank').textContent = '読み込み失敗';
         document.getElementById('jp').innerHTML = 'エラー: ' + err.message;
     });
 </script>
+
 </body>
 </html>
