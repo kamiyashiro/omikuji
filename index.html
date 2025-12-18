@@ -7,11 +7,11 @@
     <style>
         @font-face {
             font-family: 'Kouzan';
-            src: url('衡山毛筆フォント.ttf') format('truetype');
+            src: url('KouzanBrushFont.woff2') format('woff2');
             font-display: swap;
         }
         body {
-            background: #fdf9f0 url('HAIKEI.png') center center / 100% auto no-repeat;
+            background: #fdf9f0 url('HAIKEI.wp2') center center / 100% auto no-repeat;
             background-color: #fdf9f0;
             font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
             display: flex;
@@ -30,7 +30,7 @@
             border: 5.6px double #c62828;
             border-radius: 21px;
             box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-            background: #fffdf9 url('WASHI.png') center center / 100% 100% no-repeat;
+            background: #fffdf9 url('WASHI.wp2') center center / 100% 100% no-repeat;
             position: relative;
             overflow: hidden;
             border-collapse: separate;
@@ -134,7 +134,6 @@
 <div class="footer">第 <span id="num">?</span> 番 おみくじ</div>
 <a class="link-btn" href="https://kawaiikagari.github.io/omikuji/engi.html" target="_blank">かみやしろ神社</a>
 <script>
-/* スクリプト部分は変更なし（そのまま使用可能） */
 const isTestMode = location.search.includes('test');
 if (!isTestMode) {
     const lastTime = localStorage.getItem('omikuji_last');
