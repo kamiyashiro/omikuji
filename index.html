@@ -11,9 +11,9 @@
     <link rel="preload" href="WASHI.webp" as="image">
     <link rel="preload" href="KouzanBrushFont.woff2" as="font" type="font/woff2" crossorigin="critical">
     
-    <!-- 毛筆っぽい手書き風フォントをGoogle Fontsで先読み（即表示＆切り替え自然） -->
+    <!-- 毛筆っぽい可愛い手書き風フォントをGoogle Fontsで爆速先読み（即表示＆切り替え超自然） -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Yomogi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yomogi&family=Kosugi+Maru&family=RocknRoll+One&display=swap" rel="stylesheet">
 
     <style>
         @font-face {
@@ -24,7 +24,7 @@
         body {
             background: #fdf9f0 url('HAIKEI.webp') center center / 100% auto no-repeat;
             background-color: #fdf9f0;
-            font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+            font-family: serif; /* デフォルトはシンプルに */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -55,8 +55,8 @@
             writing-mode: vertical-rl;
             text-orientation: upright;
             background: transparent;
-            /* 毛筆遅くても「毛筆っぽい手書き風」で即表示！ */
-            font-family: 'Kouzan', 'Yomogi', 'Kosugi Maru', serif;
+            /* 常に毛筆っぽい可愛い手書き風で即表示！明朝ゼロ！！ */
+            font-family: 'Kouzan', 'Yomogi', 'Kosugi Maru', 'RocknRoll One', serif;
         }
         .jp-area h1 {
             font-size: 60px;
@@ -104,7 +104,7 @@
             left: 30px;
             bottom: 30px;
             /* ボタンも毛筆っぽい手書き風で即表示 */
-            font-family: 'Kouzan', 'Yomogi', 'Kosugi Maru', serif;
+            font-family: 'Kouzan', 'Yomogi', 'Kosugi Maru', 'RocknRoll One', serif;
             font-size: 28px;
             writing-mode: vertical-rl;
             text-orientation: upright;
@@ -162,7 +162,7 @@ if (!isTestMode) {
         overlay.style.left = '50%';
         overlay.style.transform = 'translate(-50%, -50%)';
         overlay.style.textAlign = 'center';
-        overlay.style.fontFamily = "'Yomogi','Kosugi Maru',serif";
+        overlay.style.fontFamily = "'Yomogi','Kosugi Maru','RocknRoll One',serif";
         overlay.style.fontSize = '28px';
         overlay.style.color = '#c62828';
         overlay.style.lineHeight = '2';
