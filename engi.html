@@ -2,23 +2,35 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="かみやしろ神社 - 影向の湖を御神体とする古の神社。Second Lifeの仮想世界に存在する神秘の聖地。">
+<meta property="og:title" content="神社神社（かみやしろじんじゃ） / Kamiyashiro Shrine｜影向の湖">
+<meta property="og:description" content="影向の湖を御神体とする古の神社。神が姿を現し、この世に臨む神秘の湖。">
+<meta property="og:type" content="website">
 <title>神社神社（かみやしろじんじゃ） / Kamiyashiro Shrine｜影向の湖</title>
 
+<!-- 高速表示のためのプリロード -->
+<link rel="preload" href="WASHI.webp" as="image">
+<link rel="preload" href="KouzanBrushFont.woff2" as="font" type="font/woff2" crossorigin>
+
 <style>
-/* --- 衡山毛筆フォント --- */
+/* --- 衡山毛筆フォント（高速WOFF2） --- */
 @font-face {
   font-family: "Kouzan";
-  src: url("./衡山毛筆フォント.ttf") format("truetype");
+  src: url("KouzanBrushFont.woff2") format("woff2");
+  font-display: swap;
 }
 
-/* --- 背景 和紙（スクロール） --- */
+/* --- 背景 和紙（高速WebP・繰り返し） --- */
 html, body {
   margin: 0;
   padding: 0;
-  background-image: url("./WASHI.png");
+  background-image: url("WASHI.webp");
   background-repeat: repeat;
   background-attachment: scroll;
   position: relative;
+  min-height: 100vh;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
 }
 
 /* --- 背景薄化レイヤー --- */
@@ -54,12 +66,10 @@ h1.main-title {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 h1.main-title .jp {
   font-family: "Kouzan", serif;
   font-weight: bold;
 }
-
 h1.main-title .en {
   font-family: Arial, Helvetica, sans-serif;
   font-style: italic;
@@ -76,7 +86,6 @@ h2 {
   padding-bottom: 6px;
   margin-top: 2.42em;
 }
-
 h2 .en {
   font-family: Arial, Helvetica, sans-serif;
   font-style: italic;
@@ -105,6 +114,14 @@ h2 .en {
   margin-bottom: 2em;
   line-height: 1.4em;
 }
+.subtitle .en {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 18px;
+  color: #666;
+  line-height: 1.6em;
+}
 
 /* --- 本文和文 --- */
 p:not(.en):not(.notice-jp) {
@@ -112,6 +129,7 @@ p:not(.en):not(.notice-jp) {
   font-size: 24px; /* 18pt */
   font-weight: bold;
   line-height: 1.5em;
+  margin-bottom: 0.8em;
 }
 
 /* --- 区切り線 --- */
@@ -123,7 +141,7 @@ p:not(.en):not(.notice-jp) {
   margin: 3em 0 1.5em 0;
 }
 
-/* --- 注意書き（衝山不使用） --- */
+/* --- 注意書き（衡山不使用） --- */
 .notice-jp {
   font-family: Arial, Helvetica, sans-serif !important;
   font-size: 20px;
@@ -131,7 +149,6 @@ p:not(.en):not(.notice-jp) {
   margin-top: 1.5em;
   line-height: 1.4em;
 }
-
 .notice-en {
   font-family: Arial, Helvetica, sans-serif !important;
   font-size: 18px;
@@ -141,16 +158,42 @@ p:not(.en):not(.notice-jp) {
   margin-bottom: 3em;
   line-height: 1.4em;
 }
+
+/* --- レスポンシブ調整 --- */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 20px;
+  }
+  h1.main-title {
+    font-size: 28px;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+  h1.main-title .jp {
+    display: block;
+    margin-bottom: 0.3em;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  p:not(.en):not(.notice-jp) {
+    font-size: 20px;
+  }
+  .en {
+    font-size: 18px;
+  }
+  .subtitle {
+    font-size: 20px;
+  }
+}
 </style>
 </head>
-
 <body>
 <div class="wrapper">
-
 <h1 class="main-title">
-  <span class="jp">神社神社（かみやしろじんじゃ）</span> / <span class="en">Kamiyashiro Shrine</span>
+  <span class="jp">神社神社（かみやしろじんじゃ）</span><br>
+  <span class="en">Kamiyashiro Shrine</span>
 </h1>
-
 <p class="subtitle">
 影向の湖を御神体とする古の神社<br>
 <span class="en">
@@ -161,7 +204,6 @@ Kamiyashiro Shrine – An Ancient Shrine Enshrining Lake Yōgō
 <h2>神社と湖 <span class="en">/ The Shrine and the Lake</span></h2>
 <p>神社神社は、湖そのものを神域とする古の神社（祠）である。</p>
 <p class="en">Kamiyashiro Shrine is an ancient sanctuary that regards the lake itself as sacred ground.</p>
-
 <p>神社と湖は分かたれた存在ではなく、一体の御神体として祀られている。</p>
 <p class="en">The shrine and the lake are worshipped as a single sacred body.</p>
 
@@ -172,7 +214,6 @@ Kamiyashiro Shrine – An Ancient Shrine Enshrining Lake Yōgō
 <h2>御祭神 <span class="en">/ Enshrined Deity</span></h2>
 <p>御祭神：かみやしろ大神。</p>
 <p class="en">Enshrined Deity: Kamiyashiro Ōkami.</p>
-
 <p>かみやしろ大神は、湖と磐座に宿り、地と水を結ぶ神とされる。</p>
 <p class="en">Kamiyashiro Ōkami is believed to dwell in the lake and sacred rock, binding land and water.</p>
 
@@ -187,25 +228,21 @@ Kamiyashiro Shrine – An Ancient Shrine Enshrining Lake Yōgō
 <h2>影向の湖（ようごうのみずうみ） <span class="en">/ Lake Yōgō</span></h2>
 <p>「影向（ようごう）」とは、神が姿を現し、この世に臨むことを意味する神道の語である。</p>
 <p class="en">“Yōgō” is a Shinto term meaning the manifestation of a deity appearing in the human world.</p>
-
 <p>影向の湖とは、神が実体としてではなく、気配や徴として湖面に現れる場を示す名である。</p>
 <p class="en">Lake Yōgō refers to a place where the presence of the deity appears as signs or reflections upon the water.</p>
-
 <p>湖面の揺らぎ、光の反射、静寂の中に生じる変化は、古くより神の影向として語り継がれてきた。</p>
 <p class="en">Ripples, reflections of light, and subtle changes upon the lake have long been regarded as signs of divine manifestation.</p>
-
 
 <!-- 区切り線 -->
 <hr class="divider">
 
 <!-- 注意書き -->
-<p class="notice-jp" style="font-family:Arial, Helvetica, sans-serif; font-size:20px; font-weight:normal; margin-top:1.5em; line-height:1.4em;">
-※本神社は仮想世界「Secondlife」内に存在する仮想神社であり、現実世界の団体や個人とは一切関係ありません。
+<p class="notice-jp">
+※本神社は仮想世界「Second Life」内に存在する仮想神社であり、現実世界の団体や個人とは一切関係ありません。
 </p>
-<p class="notice-en" style="font-family:Arial, Helvetica, sans-serif; font-size:18px; font-style:italic; font-weight:normal; color:#444; margin-bottom:3em; line-height:1.4em;">
-*This shrine exists solely within the virtual world "Secondlife" and has no affiliation with any real-world organizations or individuals.*
+<p class="notice-en">
+*This shrine exists solely within the virtual world "Second Life" and has no affiliation with any real-world organizations or individuals.*
 </p>
-
 </div>
 </body>
 </html>
