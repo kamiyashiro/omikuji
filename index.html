@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="美しい和紙風デザインのおみくじ。運勢を占おう！">
+    <meta name="description" content="美しい和紙風のおみくじ。運試しをどうぞ！かみやしろ神社">
     <title>かみやしろ神社 おみくじ</title>
     
-    <!-- 画像とフォントのプリロード（超速表示） -->
+    <!-- 超高速表示のためのプリロード -->
     <link rel="preload" href="HAIKEI.webp" as="image">
     <link rel="preload" href="WASHI.webp" as="image">
-    <link rel="preload" href="KouzanBrushFont.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="KouzanBrushFont.woff2" as="font" type="font/woff2" crossorigin="critical">
     
+    <!-- Google Fontsでフォールバック明朝体を先読み（毛筆遅くても即美しい文字表示） -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+
     <style>
         @font-face {
             font-family: 'Kouzan';
@@ -51,7 +55,8 @@
             writing-mode: vertical-rl;
             text-orientation: upright;
             background: transparent;
-            font-family: 'Kouzan', "Hiragino Mincho ProN", serif;
+            /* 毛筆遅くても美しい明朝で即表示 */
+            font-family: 'Kouzan', "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Sawarabi Mincho", serif;
         }
         .jp-area h1 {
             font-size: 60px;
@@ -98,7 +103,8 @@
             position: fixed;
             left: 30px;
             bottom: 30px;
-            font-family: 'Kouzan', "Hiragino Mincho ProN", serif;
+            /* 毛筆遅くても美しい明朝で即表示 */
+            font-family: 'Kouzan', "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Sawarabi Mincho", serif;
             font-size: 28px;
             writing-mode: vertical-rl;
             text-orientation: upright;
