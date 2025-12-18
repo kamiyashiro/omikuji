@@ -5,18 +5,24 @@
     <title>おみくじ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- 背景画像プリロード -->
+    <link rel="preload" as="image" href="HAIKEI.png">
+    <link rel="preload" as="image" href="WASHI.png">
+
     <style>
         @font-face {
             font-family: 'Kouzan';
-            src: url('./KouzanBrushFont.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
+            src: url('KouzanBrushFont.woff2') format('woff2');
             font-display: swap;
         }
 
         body {
-            background: #fdf9f0 url('./HAIKEI.png') center center / 100% auto no-repeat fixed;
             background-color: #fdf9f0;
+            background-image: url('HAIKEI.png');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+
             font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
             display: flex;
             justify-content: center;
@@ -35,13 +41,16 @@
             border: 5.6px double #c62828;
             border-radius: 21px;
             box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-            background: #fffdf9 url('./WASHI.png') center center / 100% 100% no-repeat fixed;
+            background-color: #fffdf9;
+            background-image: url('WASHI.png');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+
             position: relative;
             overflow: hidden;
             border-collapse: separate;
             border-spacing: 0;
-            background-size: calc(100% + 5.6px * 2) calc(100% + 5.6px * 2);
-            background-clip: border-box;
         }
 
         table.omikuji tr:first-child td { height: 60%; }
@@ -52,6 +61,7 @@
             padding: 38px 45px 28px 50px;
             writing-mode: vertical-rl;
             text-orientation: upright;
+            background: transparent;
             font-family: 'Kouzan', "Hiragino Mincho ProN", serif;
         }
 
@@ -88,7 +98,31 @@
             line-height: 2.2;
         }
 
-        .en strong { font-size: 26px; color:#b71c1c; }
+        .en strong {
+            font-size: 26px;
+            color: #b71c1c;
+        }
+
+        table.omikuji::before,
+        table.omikuji::after {
+            content: "";
+            position: absolute;
+            width: 41.6px;
+            height: 41.6px;
+            background: #c62828;
+        }
+
+        table.omikuji::before {
+            top: -20.8px;
+            left: -20.8px;
+            clip-path: polygon(0 0,100% 0,100% 100%);
+        }
+
+        table.omikuji::after {
+            bottom: -20.8px;
+            right: -20.8px;
+            clip-path: polygon(0 0,100% 0,0 100%);
+        }
 
         .footer {
             position: fixed;
@@ -109,7 +143,7 @@
             position: fixed;
             left: 30px;
             bottom: 30px;
-            font-family: 'Kouzan', serif;
+            font-family: 'Kouzan', "Hiragino Mincho ProN", serif;
             font-size: 28px;
             writing-mode: vertical-rl;
             text-orientation: upright;
@@ -128,64 +162,109 @@
             align-items: center;
             z-index: 20;
         }
+
+        .link-btn:hover {
+            background: #fef7ef;
+        }
+
+        @media (max-width: 600px) {
+            .jp-area h1 { font-size: 68px; }
+            .jp-area h2 { font-size: 38px; }
+            .jp-area > div { font-size: 31px; }
+            .link-btn {
+                font-size: 24px;
+                padding: 8px 12px;
+                height: calc(24px * 6 + 8px * 2);
+            }
+        }
     </style>
 </head>
 
 <body>
 
 <table class="omikuji">
-<tr><td class="jp-area">
-    <h1 id="rank">読み込み中…</h1>
-    <h2 id="title"></h2>
-    <div id="jp"></div>
-</td></tr>
-<tr><td class="en-area">
-    <strong id="enRank"></strong> — <span id="enTitle"></span><br><br>
-    <span id="enText"></span>
-</td></tr>
+    <tr>
+        <td class="jp-area">
+            <h1 id="rank">読み込み中…</h1>
+            <h2 id="title"></h2>
+            <div id="jp"></div>
+        </td>
+    </tr>
+    <tr>
+        <td class="en-area">
+            <strong id="enRank"></strong> — <span id="enTitle"></span><br><br>
+            <span id="enText"></span>
+        </td>
+    </tr>
 </table>
 
 <div class="footer">第 <span id="num">?</span> 番 おみくじ</div>
 
-<a class="link-btn" href="https://kawaiikagari.github.io/omikuji/engi.html" target="_blank">
-かみやしろ神社
-</a>
+<a class="link-btn"
+   href="https://kawaiikagari.github.io/omikuji/engi.html"
+   target="_blank">かみやしろ神社</a>
 
 <script>
-fetch('./omikuji.xml', { cache: 'no-store' })
-.then(r => {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.text();
-})
-.then(str => {
-    const xml = new DOMParser().parseFromString(str, 'text/xml');
-    const items = Array.from(xml.querySelectorAll('omikuji'));
-    if (!items.length) throw new Error('omikuji データなし');
+const isTestMode = location.search.includes('test');
 
-    const item = items[Math.floor(Math.random() * items.length)];
-    const rank = item.querySelector('rank');
+if (!isTestMode) {
+    const lastTime = localStorage.getItem('omikuji_last');
+    const now = Date.now();
+    const cooldown = 30 * 60 * 1000;
 
-    document.getElementById('rank').textContent =
-        rank.getAttribute('jp') || rank.textContent;
+    if (lastTime && (now - lastTime) < cooldown) {
+        const wait = Math.ceil((cooldown - (now - lastTime)) / 60000);
 
-    document.getElementById('title').textContent =
-        item.querySelector('title_jp')?.textContent || '';
+        document.querySelector('table.omikuji').style.display = 'none';
+        document.querySelector('.footer').style.display = 'none';
 
-    document.getElementById('jp').textContent =
-        item.querySelector('text_jp')?.textContent || '';
+        const overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = '50%';
+        overlay.style.left = '50%';
+        overlay.style.transform = 'translate(-50%, -50%)';
+        overlay.style.textAlign = 'center';
+        overlay.style.fontFamily = "'Hiragino Mincho ProN','Yu Mincho',Georgia,serif";
+        overlay.style.fontSize = '28px';
+        overlay.style.color = '#c62828';
+        overlay.style.lineHeight = '2';
+        overlay.style.zIndex = '30';
 
-    document.getElementById('enRank').textContent = rank.textContent;
-    document.getElementById('enTitle').textContent =
-        item.querySelector('title_en')?.textContent || '';
-    document.getElementById('enText').textContent =
-        item.querySelector('text_en')?.textContent || '';
+        overlay.innerHTML = `
+            30分に1回しか引けません<br>
+            <span style="font-size:42px; font-weight:bold;">あと ${wait} 分</span><br><br>
+            You can draw Omikuji only once every 30 minutes<br>
+            <strong>${wait} more minute${wait > 1 ? 's' : ''}</strong>
+        `;
+        document.body.appendChild(overlay);
+        throw new Error("制限中");
+    }
+}
 
-    document.getElementById('num').textContent = items.indexOf(item) + 1;
-})
-.catch(err => {
-    document.getElementById('rank').textContent = '読み込み失敗';
-    document.getElementById('jp').textContent = err.message;
-});
+fetch('omikuji.xml')
+    .then(r => r.text())
+    .then(str => {
+        const xml = new DOMParser().parseFromString(str, "text/xml");
+        const items = Array.from(xml.querySelectorAll('omikuji'));
+
+        const item = items[Math.floor(Math.random() * items.length)];
+        const rankEl = item.querySelector('rank');
+
+        document.getElementById('rank').textContent = rankEl.getAttribute('jp');
+        document.getElementById('title').textContent = item.querySelector('title_jp').textContent;
+        document.getElementById('jp').textContent = item.querySelector('text_jp').textContent;
+
+        document.getElementById('enRank').textContent = rankEl.textContent;
+        document.getElementById('enTitle').textContent = item.querySelector('title_en').textContent;
+        document.getElementById('enText').textContent = item.querySelector('text_en').textContent;
+        document.getElementById('num').textContent = items.indexOf(item) + 1;
+
+        if (!isTestMode) localStorage.setItem('omikuji_last', Date.now());
+    })
+    .catch(err => {
+        document.getElementById('rank').textContent = '読み込み失敗';
+        document.getElementById('jp').textContent = err.message;
+    });
 </script>
 
 </body>
