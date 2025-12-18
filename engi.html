@@ -9,12 +9,16 @@
 <meta property="og:type" content="website">
 <title>神社神社（かみやしろじんじゃ） / Kamiyashiro Shrine｜影向の湖</title>
 
-<!-- 高速表示のためのプリロード -->
+<!-- 超高速表示のためのプリロード -->
 <link rel="preload" href="WASHI.webp" as="image">
-<link rel="preload" href="KouzanBrushFont.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="KouzanBrushFont.woff2" as="font" type="font/woff2" crossorigin="critical">
+
+<!-- Google Fontsでフォールバック明朝体を先読み（毛筆遅くても即美しい文字表示） -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
 
 <style>
-/* --- 衡山毛筆フォント（高速WOFF2） --- */
+/* --- 毛筆フォント定義 --- */
 @font-face {
   font-family: "Kouzan";
   src: url("KouzanBrushFont.woff2") format("woff2");
@@ -30,7 +34,6 @@ html, body {
   background-attachment: scroll;
   position: relative;
   min-height: 100vh;
-  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
 }
 
 /* --- 背景薄化レイヤー --- */
@@ -55,19 +58,19 @@ body::before {
   z-index: 1;
 }
 
-/* --- h1 メインタイトル（太字・改行防止） --- */
+/* --- h1 メインタイトル --- */
 h1.main-title {
   border-bottom: 2px solid #000;
   padding-bottom: 0.2em;
   margin-bottom: 0.5em;
   font-weight: bold;
-  font-size: 37.3px; /* 28pt */
+  font-size: 37.3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 h1.main-title .jp {
-  font-family: "Kouzan", serif;
+  font-family: "Kouzan", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Sawarabi Mincho", serif;
   font-weight: bold;
 }
 h1.main-title .en {
@@ -79,8 +82,8 @@ h1.main-title .en {
 
 /* --- h2（見出し） --- */
 h2 {
-  font-family: "Kouzan", serif;
-  font-size: 26.7px; /* 20pt */
+  font-family: "Kouzan", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Sawarabi Mincho", serif;
+  font-size: 26.7px;
   font-weight: bold;
   border-bottom: 1px solid rgba(0,0,0,0.3);
   padding-bottom: 6px;
@@ -90,7 +93,7 @@ h2 .en {
   font-family: Arial, Helvetica, sans-serif;
   font-style: italic;
   font-weight: normal;
-  font-size: 21.3px; /* 16pt */
+  font-size: 21.3px;
   color: #666;
 }
 
@@ -99,7 +102,7 @@ h2 .en {
   font-family: Arial, Helvetica, sans-serif;
   font-style: italic;
   font-weight: normal;
-  font-size: 21.3px; /* 16pt */
+  font-size: 21.3px;
   color: #444;
   margin-top: 0.18em;
   margin-bottom: 1.1em;
@@ -108,8 +111,8 @@ h2 .en {
 
 /* --- サブタイトル --- */
 .subtitle {
-  font-family: "Kouzan", serif;
-  font-size: 24px; /* 18pt */
+  font-family: "Kouzan", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Sawarabi Mincho", serif;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 2em;
   line-height: 1.4em;
@@ -125,8 +128,8 @@ h2 .en {
 
 /* --- 本文和文 --- */
 p:not(.en):not(.notice-jp) {
-  font-family: "Kouzan", serif;
-  font-size: 24px; /* 18pt */
+  font-family: "Kouzan", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Sawarabi Mincho", serif;
+  font-size: 24px;
   font-weight: bold;
   line-height: 1.5em;
   margin-bottom: 0.8em;
@@ -141,7 +144,7 @@ p:not(.en):not(.notice-jp) {
   margin: 3em 0 1.5em 0;
 }
 
-/* --- 注意書き（衡山不使用） --- */
+/* --- 注意書き --- */
 .notice-jp {
   font-family: Arial, Helvetica, sans-serif !important;
   font-size: 20px;
@@ -233,10 +236,8 @@ Kamiyashiro Shrine – An Ancient Shrine Enshrining Lake Yōgō
 <p>湖面の揺らぎ、光の反射、静寂の中に生じる変化は、古くより神の影向として語り継がれてきた。</p>
 <p class="en">Ripples, reflections of light, and subtle changes upon the lake have long been regarded as signs of divine manifestation.</p>
 
-<!-- 区切り線 -->
 <hr class="divider">
 
-<!-- 注意書き -->
 <p class="notice-jp">
 ※本神社は仮想世界「Second Life」内に存在する仮想神社であり、現実世界の団体や個人とは一切関係ありません。
 </p>
