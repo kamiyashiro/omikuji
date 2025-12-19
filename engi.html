@@ -144,22 +144,23 @@ p:not(.en):not(.notice-jp) {
   margin: 3em 0 1.5em 0;
 }
 
-/* --- 注意書き --- */
+/* --- 注意書き（ボールド解除・サイズ小さく） --- */
 .notice-jp {
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 1.5em;
-  line-height: 1.4em;
+  font-size: 14px;
+  font-weight: normal;
+  color: #666;
+  margin-top: 2em;
+  line-height: 1.6em;
 }
 .notice-en {
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 18px;
+  font-size: 13px;
   font-style: italic;
   font-weight: normal;
-  color: #444;
-  margin-bottom: 3em;
-  line-height: 1.4em;
+  color: #777;
+  margin-top: 0.5em;
+  line-height: 1.6em;
 }
 
 /* --- レスポンシブ調整 --- */
@@ -187,6 +188,12 @@ p:not(.en):not(.notice-jp) {
   }
   .subtitle {
     font-size: 20px;
+  }
+  .notice-jp {
+    font-size: 13px;
+  }
+  .notice-en {
+    font-size: 12px;
   }
 }
 </style>
@@ -260,12 +267,9 @@ Kamiyashiro Shrine – An Ancient Shrine Enshrining Lake Yōgō
 
 <hr class="divider">
 
-<p class="notice-jp">
-※本神社は仮想世界内に存在する仮想神社であり、現実世界の団体や個人とは一切関係ありません。
-</p>
-<p class="notice-en">
-*This shrine exists solely within a virtual world and has no affiliation with any real-world organizations or individuals.*
-</p>
+<p class="notice-jp">※本神社は仮想世界内に存在する仮想神社であり、現実世界の団体や個人とは一切関係ありません。</p>
+<p class="notice-en">*This shrine exists solely within a virtual world and has no affiliation with any real-world organizations or individuals.*</p>
+
 </div>
 </body>
 </html>
